@@ -1,5 +1,19 @@
-# Install dependencies
-npm install
+name: Reminder Workflow
 
-# Run the bot
-npm start
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start the bot
+        run: npm start
