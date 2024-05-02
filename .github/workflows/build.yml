@@ -41,13 +41,9 @@ jobs:
           
           git add Docs
           git commit -m "[BOT] Caricamento PDF"
-
-    - name: Push changes to another repository
-      uses: ad-m/github-push-action@v0.6.0
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: main
-        repository: DigiMatt02/prova2
+          git push git@github.com:DigiMatt02/prova2.git main
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         
     - name: Publish artifacts
       uses: actions/upload-artifact@v3
