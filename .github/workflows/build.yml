@@ -39,8 +39,7 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan github.com >> ~/.ssh/known_hosts
         cat ~/.ssh/known_hosts
-        git remote add board git@github.com:DigiMatt02/prova2.git
-        git push -u board
+        git clone git@github.com:DigiMatt02/prova2.git
     
     - name: Publish artifacts
       uses: actions/upload-artifact@v3
