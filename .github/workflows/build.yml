@@ -38,11 +38,11 @@ jobs:
     -   run: |
           git config --global user.name 'DigiMatt02 '
           git config --global user.email 'digimat02@gmail.com'
+          git config pull.rebase true
           git remote add board git@github.com:DigiMatt02/prova2.git
           git add Docs
           git commit -m "[BOT] Caricamento PDF"
           git pull board main
-          git config pull.rebase true
           git push git@github.com:DigiMatt02/prova2.git main
        
         
