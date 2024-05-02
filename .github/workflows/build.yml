@@ -27,6 +27,12 @@ jobs:
       run: |
         ls
         mv build-output Docs
+        echo '# Ignora tutti i file e le cartelle' > .gitignore
+        echo '*' >> .gitignore
+        echo '' >> .gitignore
+        echo '# Tranne i file nella cartella specifica' >> .gitignore
+        echo '!Docs/' >> .gitignore
+        echo '!Docs/**' >> .gitignore
 
     - name: webfactory/ssh-agent
       uses: webfactory/ssh-agent@v0.9.0
