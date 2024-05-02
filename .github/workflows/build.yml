@@ -39,16 +39,6 @@ jobs:
           git config --global user.name 'DigiMatt02 '
           git config --global user.email 'digimat02@gmail.com'
           git remote add board git@github.com:DigiMatt02/prova2.git
-          echo '# Ignora tutti i file e le cartelle' > .gitignore
-          echo '*' >> .gitignore
-          echo '' >> .gitignore
-          echo '# Tranne i file nella cartella specifica' >> .gitignore
-          echo '!Docs/' >> .gitignore
-          echo '!Docs/**' >> .gitignore
-          cat .gitignore
-          git add -f .gitignore
-          git commit -m "bo"
-          git push -f
           git add Docs
           git commit -m "[BOT] Caricamento PDF"
           git push board prova
