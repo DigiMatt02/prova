@@ -28,7 +28,6 @@ jobs:
         ls
         mv build-output Docs
 
-    - uses: actions/checkout@v4
     - name: webfactory/ssh-agent
       uses: webfactory/ssh-agent@v0.9.0
       with:
