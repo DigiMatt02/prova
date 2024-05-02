@@ -30,12 +30,12 @@ jobs:
 
     - name: Configure SSH and clone
       env:
-        UPLOAD_TOKEN: ${{ secrets.PUSH_TOKEN }}
+        ssh-private-key: ${{ secrets.PUSH_TOKEN }}
       run: |
         git config --global user.name 'bot'
         git config --global user.email 'riccardo.cavalli@studenti.unipd.it'
         mkdir -p ~/.ssh
-        echo "$UPLOAD_TOKEN" > ~/.ssh/id_rsa
+        echo "$ssh-private-key" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan github.com >> ~/.ssh/known_hosts
         cat ~/.ssh/known_hosts
