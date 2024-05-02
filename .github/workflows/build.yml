@@ -51,7 +51,7 @@ jobs:
           git push -f
           git add Docs
           git commit -m "[BOT] Caricamento PDF"
-          git push board
+          git push board prova
        
         
     - name: Publish artifacts
