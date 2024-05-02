@@ -39,8 +39,8 @@ jobs:
           git config --global user.email 'digimat02@gmail.com'
           git add Docs
           git commit -m "[BOT] Caricamento PDF"
+          git clone git@github.com:DigiMatt02/prova2.git
           git remote add board git@github.com:DigiMatt02/prova2.git
-          git pull board main
           git push board
         
     - name: Publish artifacts
