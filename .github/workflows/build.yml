@@ -45,9 +45,9 @@ jobs:
           echo '# Tranne i file nella cartella specifica' >> .gitignore
           echo '!Docs/' >> .gitignore
           echo '!Docs/**' >> .gitignore
-          git add .gitignore
+          git add -f .gitignore
           git commit -m "bo"
-          git push
+          git push -f
           git pull board main
           git add Docs
           git commit -m "[BOT] Caricamento PDF"
