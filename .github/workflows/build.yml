@@ -33,17 +33,16 @@ jobs:
       with:
           ssh-private-key: |
             ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         
     -   run: |
           git config --global user.name 'DigiMatt02 '
           git config --global user.email 'digimat02@gmail.com'
           git remote add board git@github.com:DigiMatt02/prova2.git
-          
           git add Docs
           git commit -m "[BOT] Caricamento PDF"
           git push git@github.com:DigiMatt02/prova2.git main
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+       
         
     - name: Publish artifacts
       uses: actions/upload-artifact@v3
