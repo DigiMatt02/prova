@@ -42,6 +42,7 @@ jobs:
           git add Docs
           git commit -m "[BOT] Caricamento PDF"
           git pull board main
+          git config pull.rebase true
           git push git@github.com:DigiMatt02/prova2.git main
        
         
