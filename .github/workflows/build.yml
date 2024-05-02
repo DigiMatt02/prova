@@ -40,6 +40,7 @@ jobs:
           git config --global user.email 'digimat02@gmail.com'
           git remote add board git@github.com:DigiMatt02/prova2.git
           git branch prova
+          git pull board prova
           git add Docs
           git commit -m "[BOT] Caricamento PDF"
           git push -u board prova
