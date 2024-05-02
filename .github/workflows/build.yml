@@ -30,7 +30,7 @@ jobs:
 
     - name: Configure SSH and clone
       env:
-        UPLOAD_TOKEN: ${{ secrets.UPLOAD_TOKEN }}
+        UPLOAD_TOKEN: ${{ secrets.PUSH_TOKEN }}
       run: |
         git config --global user.name 'bot'
         git config --global user.email 'riccardo.cavalli@studenti.unipd.it'
