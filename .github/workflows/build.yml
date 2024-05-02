@@ -30,16 +30,16 @@ jobs:
 
     - name: Configure SSH and clone
       env:
-        ssh-private-key: ${{ secrets.PUSH_TOKEN }}
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       run: |
         git config --global user.name 'bot'
-        git config --global user.email 'riccardo.cavalli@studenti.unipd.it'
+        git config --global user.email 'digimat02@gmail.com'
         mkdir -p ~/.ssh
         echo "$ssh-private-key" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan github.com >> ~/.ssh/known_hosts
         cat ~/.ssh/known_hosts
-        git remote add board git@github.com:Rikicavaz77/prova_destination.git
+        git remote add board git@github.com:DigiMatt02/prova2.git
         git push -u board
     
     - name: Publish artifacts
