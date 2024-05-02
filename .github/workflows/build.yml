@@ -45,7 +45,7 @@ jobs:
     - name: Push changes to another repository
       uses: ad-m/github-push-action@v0.6.0
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         branch: main
         repository: DigiMatt02/prova2
         
