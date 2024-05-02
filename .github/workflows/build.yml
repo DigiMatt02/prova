@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - main
-      
-permissions:
-  contents: write
-  pages: write
-  id-token: write
 
 jobs:
   build:
@@ -29,17 +24,22 @@ jobs:
         docker exec argo-docs-latexpdfbuilder-1 bash -c 'cd /data && chmod +x *.sh && ./compilescript.sh -a'
 
     - name: Commit and push changes
-      env:
-        upload_token: ${{ secrets.UPLOAD_TOKEN }}
       run: |
-        git config --global user.name 'bot'
-        git config --global user.email 'digimat02@gmail.com'
         ls
         mv build-output Docs
-        git add .
-        git commit -m "Compile LaTeX files and move PDFs"
-        git remote add board https://github.com/DigiMatt02/prova2.git
-        git remote 
+
+    - name: Configure SSH and clone
+      env:
+        UPLOAD_TOKEN: ${{ secrets.UPLOAD_TOKEN }}
+      run: |
+        git config --global user.name 'bot'
+        git config --global user.email 'riccardo.cavalli@studenti.unipd.it'
+        mkdir -p ~/.ssh
+        echo "$UPLOAD_TOKEN" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        cat ~/.ssh/known_hosts
+        git remote add board git@github.com:Rikicavaz77/prova_destination.git
         git push -u board
     
     - name: Publish artifacts
@@ -48,6 +48,11 @@ jobs:
         name: Documentazione
         path: |
           build
+            
+    - name: Stop Docker Compose
+      run: |
+        cd ${{ github.workspace }}/tools
+        docker compose stop
             
     - name: Stop Docker Compose
       run: |
