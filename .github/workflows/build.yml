@@ -45,6 +45,7 @@ jobs:
           echo '# Tranne i file nella cartella specifica' >> .gitignore
           echo '!Docs/' >> .gitignore
           echo '!Docs/**' >> .gitignore
+          git pull board main
           git add Docs
           git commit -m "[BOT] Caricamento PDF"
           git push git@github.com:DigiMatt02/prova2.git main
