@@ -28,18 +28,29 @@ jobs:
         ls
         mv build-output Docs
 
-    - name: Configure SSH and clone
-      env:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      run: |
-        git config --global user.name 'bot'
-        git config --global user.email 'digimat02@gmail.com'
-        mkdir -p ~/.ssh
-        echo "$ssh-private-key" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        cat ~/.ssh/known_hosts
-        git clone git@github.com:DigiMatt02/prova2.git
+    jobs:
+    deployment_keys_demo:
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [ ubuntu-latest, macOS-latest, windows-latest ]
+        runs-on: ${{ matrix.os }}
+        steps:
+            -   uses: actions/checkout@v4
+            -   name: Setup key
+                uses: ./
+                with:
+                    ssh-private-key: |
+                        ${{ secrets.SSH_PRIVATE_KEY }}
+            -   run: |
+                    git config --global user.name 'bot'
+                    git config --global user.email 'digimat02@gmail.com'
+                    mkdir -p ~/.ssh
+                    echo "$ssh-private-key" > ~/.ssh/id_rsa
+                    chmod 600 ~/.ssh/id_rsa
+                    ssh-keyscan github.com >> ~/.ssh/known_hosts
+                    cat ~/.ssh/known_hosts
+                    git clone git@github.com:DigiMatt02/prova2.git
     
     - name: Publish artifacts
       uses: actions/upload-artifact@v3
@@ -47,11 +58,7 @@ jobs:
         name: Documentazione
         path: |
           build
-            
-    - name: Stop Docker Compose
-      run: |
-        cd ${{ github.workspace }}/tools
-        docker compose stop
+
             
     - name: Stop Docker Compose
       run: |
