@@ -11,7 +11,7 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Start containers
       run: |
@@ -28,33 +28,29 @@ jobs:
         ls
         mv build-output Docs
 
-
-
-  deployment_keys_demo:
-      runs-on: ${{ matrix.os }}
-        steps:
-            -   uses: actions/checkout@v4
-            -   name: Setup key
-                uses: ./
-                with:
-                  ssh-private-key: |
-                    ${{ secrets.SSH_PRIVATE_KEY }}
-            -   run: |
-                    git config --global user.name 'bot'
-                    git config --global user.email 'digimat02@gmail.com'
-                    mkdir -p ~/.ssh
-                    echo "$ssh-private-key" > ~/.ssh/id_rsa
-                    chmod 600 ~/.ssh/id_rsa
-                    ssh-keyscan github.com >> ~/.ssh/known_hosts
-                    cat ~/.ssh/known_hosts
-                    git clone git@github.com:DigiMatt02/prova2.git
+    - uses: actions/checkout@v4
+    - name: webfactory/ssh-agent
+      uses: webfactory/ssh-agent@v0.9.0
+      with:
+          ssh-private-key: |
+            ${{ secrets.SSH_PRIVATE_KEY }}
         
-            - name: Publish artifacts
-              uses: actions/upload-artifact@v3
-              with:
-                name: Documentazione
-                path: |
-                  build
+    -   run: |
+          git config --global user.name 'bot'
+          git config --global user.email 'digimat02@gmail.com'
+          mkdir -p ~/.ssh
+          echo "$ssh-private-key" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          cat ~/.ssh/known_hosts
+          git clone git@github.com:DigiMatt02/prova2.git
+        
+    - name: Publish artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: Documentazione
+        path: |
+          build
     
                 
             -  name: Stop Docker Compose
