@@ -41,7 +41,7 @@ jobs:
           git remote add board git@github.com:DigiMatt02/prova2.git
           git add Docs
           git commit -m "[BOT] Caricamento PDF"
-          git pull board
+          git pull board main
           git push git@github.com:DigiMatt02/prova2.git main
        
         
